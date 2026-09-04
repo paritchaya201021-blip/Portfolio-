@@ -1,0 +1,769 @@
+><!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | นักเรียนม.ปลาย</title>
+    <!-- Google Fonts: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome สำหรับไอคอน -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #FAFAFA;
+            --card-bg: #FFFFFF;
+            --text-main: #2C3E50;
+            --text-muted: #7F8C8D;
+            --primary: #48C9B0; /* สีมิ้นท์ */
+            --primary-hover: #35B39B;
+            --primary-light: #E8F8F5;
+            --border-color: #E2E8F0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        body {
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0 4rem 0;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-color) 0%, var(--primary-light) 100%);
+            padding-top: 4rem;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(72, 201, 176, 0.2);
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(72, 201, 176, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .about-img-box {
+            width: 100%;
+            height: 300px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 5rem;
+        }
+
+        .about-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .info-list li {
+            font-size: 0.95rem;
+        }
+
+        .info-list li strong {
+            color: var(--text-main);
+        }
+
+        /* Skills Section (Progress Bar / Skill Chart Style) */
+        .skills-container {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem 3rem;
+        }
+
+        .skill-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .skill-info span:last-child {
+            color: var(--text-muted);
+        }
+
+        .skill-bar-bg {
+            width: 100%;
+            height: 10px;
+            background: var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 5px;
+            width: 0; /* เริ่มต้นที่ 0 เพื่อให้วิ่งอนิเมชั่นได้ */
+            transition: width 1.2s ease-in-out;
+        }
+
+        /* Projects & Activities Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .content-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .card-img-placeholder {
+            height: 180px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-body span {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card-body h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-body p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            flex-grow: 1;
+        }
+
+        /* Goals Section */
+        .goals-box {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #FFFFFF 100%);
+            border: 1px solid rgba(72, 201, 176, 0.3);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .goals-box i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .goals-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .goals-box p {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            padding: 1.8rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: var(--text-main);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-card:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-card i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card h4 {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .contact-card span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--card-bg);
+            margin-top: 4rem;
+        }
+
+        /* Animation class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 1.5rem;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-grid, .skills-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .info-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#hero" class="nav-logo">Portfolio<span>.</span></a>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">เกี่ยวกับฉัน</a></li>
+            <li><a href="#skills">ทักษะ</a></li>
+            <li><a href="#projects">โปรเจกต์</a></li>
+            <li><a href="#activities">ผลงานเด่น</a></li>
+            <li><a href="#goals">เป้าหมาย</a></li>
+            <li><a href="#contact">ติดต่อ</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content reveal" style="margin: 0 auto;">
+                <span class="hero-badge">ยินดีต้อนรับสู่พอร์ตโฟลิโอ</span>
+                <h1>สวัสดีค่ะ, ดิฉัน <br><span>นางสาวปริชญา คำโม</span></h1>
+                <p>ชื่อเล่น: ออย | ชั้นมัธยมศึกษาปีที่ 4 | โรงเรียนสามร้อยยอดวิทยาคม</p>
+                <p style="font-size: 0.95rem; margin-top: -1rem; margin-bottom: 2rem;">มีความสนใจหลักด้านการวาดรูป และการกีฬาอีร์สปอต</p>
+                <div class="btn-group">
+                    <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> ดูผลงานโปรเจกต์</a>
+                    <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> ติดต่อฉัน</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>เกี่ยวกับฉัน</h2>
+                <p>ข้อมูลส่วนตัวและประวัติการศึกษาเบื้องต้น</p>
+            </div>
+            
+                <div class="about-info">
+                    <img src="https://i.postimg.cc/Sx0vBTQ4/aoy.jpg" alt="100" width="300" height="300">
+                    <h3>นางสาวปริชญา คำโม (ออย)</h3>
+                    <p>ปัจจุบันกำลังศึกษาอยู่ระดับชั้นมัธยมศึกษาปีที่ 4 แผนการเรียนนิเทศ-ศิลป์ โรงเรียนสามร้อยยอดวิทยาคม มีความมุ่งมั่นในการเรียนรู้สิ่งใหม่ๆ นอกห้องเรียน โดยเฉพาะการวาดรูปอนิเมชั่น และการแข่งขันอีสปอร์ต</p>
+                    <ul class="info-list">
+                        
+                        <li><strong>ชื่อเล่น:</strong> ออย</li>
+                        <li><strong>ระดับชั้น:</strong> ม.4/7</li>
+                        <li><strong>โรงเรียน:</strong> สามร้อยยอดวิทยาคม</li>
+                        <li><strong>ความสนใจ:</strong> Animation esport</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (Skill Chart / Progress Bars) -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>ทักษะความสามารถ</h2>
+                <p>ระดับความเชี่ยวชาญในด้านต่างๆ</p>
+            </div>
+            <div class="skills-container reveal">
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <span>drawing</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-width="90%"></div>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <span>Animation</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-width="80%"></div>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <span>skill play moba</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-width="90%"></div>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <div class="skill-info">
+                        <span>English   </span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-width="75%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>โปรเจกต์ที่เคยทำ</h2>
+                <p>ผลงานโครงงานและการพัฒนาชิ้นงานที่ผ่านมา</p>
+            </div>
+            <div class="cards-grid">
+                <div class="content-card reveal">
+                    <div class="card-img-placeholder">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="card-body">
+                        <span>แข่งขันกีฬาสีrovโรงเรียน</span>
+                        <h3>ได้อันดับ1ปีการศึกษา2569</h3>
+                        <p> แข่งกันรวม6ทีมได้อันดับที่1ชนะเลิศ</p>
+                        
+                    </div>
+                </div>
+                <div class="content-card reveal" style="transition-delay: 0.1s;">
+                    <div class="card-img-placeholder">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="card-body">
+                        <span>แข่งขันภาษาอังกฤษspelling Bee</span>
+                        <h3>ได้อันดับ3ปีการศึกษา2569</h3>
+                        <p> แข่งเขียนตามคำบอกภาษาอังกฤษชนะอันดับ3ในห้องปกตื</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities & Achievement Section -->
+    <section id="activities">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>กิจกรรมและผลงานเด่น</h2>
+                <p>ความภาคภูมิใจและการเข้าร่วมกิจกรรมต่างๆ</p>
+            </div>
+            <div class="cards-grid">
+                <div class="content-card reveal">
+                    <div class="card-img-placeholder" style="background: var(--bg-color); border-bottom: 1px solid var(--border-color);">
+                        <i class="fas fa-award" style="color: var(--primary);"></i>
+                    </div>
+                    <div class="card-body">
+                         <span>แข่งขันภาษาอังกฤษspelling Bee</span>
+                        <h3>ได้อันดับ3ปีการศึกษา2569</h3>
+                        <p> แข่งเขียนตามคำบอกภาษาอังกฤษชนะอันดับ3ในห้องปกตื</p>
+                    </div>
+                </div>
+                <div class="content-card reveal" style="transition-delay: 0.1s;">
+                    <div class="card-img-placeholder" style="background: var(--bg-color); border-bottom: 1px solid var(--border-color);">
+                        <i class="fas fa-hands-helping" style="color: var(--primary);"></i>
+                    </div>
+                    <div class="card-body">
+                        <span>แข่งขันกีฬาสีrovโรงเรียน</span>
+                        <h3>ได้อันดับ1ปีการศึกษา2569</h3>
+                        <p> แข่งกันรวม6ทีมได้อันดับที่1ชนะเลิศ</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Goals Section -->
+    <section id="goals">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>เป้าหมายในอนาคต</h2>
+                <p>ทิศทางและสิ่งที่มุ่งหวังจะทำให้สำเร็จ</p>
+            </div>
+            <div class="goals-box reveal">
+                <i class="fas fa-bullseye"></i>
+                <h3>ศึกษาต่อปริญญาตรีคณะcamt</h3>
+                <p>เป้าหมายสูงสุดคือการได้ศึกษาต่อในระดับมหาวิทยาลัยในสาขาที่เกี่ยวข้องกับการวาดรูปหรือการพัฒนาเกม เพื่อพัฒนาทักษะเชิงลึก นำความรู้ความสามารถมาสร้างสรรค์ผลงานวาดและพัฒนาเกม</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>ช่องทางติดต่อ</h2>
+                <p>สามารถติดต่อหรือสอบถามข้อมูลเพิ่มเติมได้ที่ช่องทางเหล่านี้</p>
+            </div>
+            <div class="contact-container reveal">
+                <a href="mailto:portfolio@email.com" class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>อีเมล</h4>
+                    <span>paritchaya201021@email.com</span>
+                </a>
+                <a href="https://www.instagram.com/paritchaya_212010/" target="_blank" class="contact-card">
+                    <i class="fab fa-instagram"></i>
+                    <h4>Instagram</h4>
+                    <span>paritchaya_212010</span>
+                </a>
+                <a href="https://line.me/ti/p/w5VaUWyX7T" target="_blank" class="contact-card">
+                    <i class="fab fa-line"></i>
+                    <h4>Line ID</h4>
+                    <span>aoy201021aoy</span>
+                </a>
+                <a href="tel:0936833103" class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>โทรศัพท์</h4>
+                    <span>093-683-3103</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Portfolio of Portfolio Student. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript สำหรับควบคุมการทำงานหน้าเว็บและอนิเมชั่นชาร์จทักษะ -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 2. Scroll Reveal Animation & Skill Bars Animation
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                    
+                    // สั่งให้ชาร์จเปอร์เซ็นต์ทักษะวิ่งเมื่อเลื่อนมาเจอส่วน Skills
+                    const skillBars = element.querySelectorAll('.skill-bar-fill');
+                    skillBars.forEach(bar => {
+                        const targetWidth = bar.getAttribute('data-width');
+                        bar.style.width = targetWidth;
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealElements);
+        revealElements();
+    </script>
+</body>
+</html
